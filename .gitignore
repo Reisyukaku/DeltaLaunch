@@ -1,0 +1,13 @@
+build/*
+debug/*
+0100000000001000/*
+project/Debug/*
+project/SD/*
+project/.vs/*
+*.elf
+*.nro
+*.pfs0
+*.nso
+*.nacp
+*.nsp
+*.npdm

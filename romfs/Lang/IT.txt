@@ -1,0 +1,87 @@
+(nessuno)
+Errore
+Attenzione
+Successo
+Non implementato!
+In gioco
+Avvia
+Chiusura
+Apri
+On
+Off
+Ok
+Indietro
+Sì
+No
+Abilitato
+Disabilitato
+Codice di errore
+Nome della cartella
+Imposta nome
+Cartella
+Notizie
+Impostazioni
+La tua SD è stata rimossa! È richiesto un riavvio.
+Cambiare il tema richiede un riavvio.
+La cartella è piena!
+Vuoi chiudere l'applicazione in esecuzione?
+Impostazioni generali
+Internet
+Gestione dati
+Utenti
+Aspetto
+Temi
+Impostazioni TV
+Informazioni di sistema
+Impostazioni generali.
+Visualizza le impostazioni internet.
+Gestisci i tuoi dati.
+Modifica i profili utente.
+Cambia aspetto.
+Cambia il tema attuale.
+Gestisci le tue impostazioni della TV.
+Informazioni specifiche della tua console.
+Schermata di blocco
+AutoRCM
+Questa opzione scrive sulla NAND! Vuoi procedere?
+Scrittura completata!
+Impostazioni Internet
+Cambia schermata d'avvio di ReiNX
+Usa un'immagine predefinita
+Selezione del gioco
+Seleziona il tema
+Firmware
+Seriale
+Nickname
+Configura controller
+Aggiorna console
+Aggiorna CFW ReiNX
+Tema attuale
+Bordo
+Dimensioni diverse
+Stile Ps4
+Doppia fila
+Aggiungi cartella
+Rimuovi tema
+linguaggio
+Regione
+Fuso orario
+Impossibile impostare l'immagine del profilo personalizzata.
+Elimina titolo
+Risoluzione TV
+Gamma RGB
+TV Sound
+Data
+gennaio
+febbraio
+marzo
+aprile
+potrebbe
+giugno
+luglio
+agosto
+settembre
+ottobre
+novembre
+dicembre
+Max folder count has been reached!

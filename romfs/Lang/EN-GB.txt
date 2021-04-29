@@ -1,0 +1,87 @@
+(none)
+Error
+Warning
+Success
+Unimplemented!
+Playing
+Start
+Closing
+Open
+On
+Off
+Ok
+Back
+Yes
+No
+Enabled
+Disabled
+Error code
+Folder name
+Set name
+Folder
+News
+Settings
+Your SD has been removed! A reboot is required.
+Theme change requires a reboot.
+Folder is full!
+Do you want to close the running application?
+General config
+Internet
+Data Management
+Users
+Look and Feel
+Themes
+TV Settings
+System Info
+General purpose configurations.
+View internet settings.
+Manage your data.
+Edit user profiles.
+Change look and feel.
+Change current theme.
+Manage your TV settings.
+Console specific information.
+Lock screen
+AutoRCM
+This writes to the NAND! Do you want to proceed?
+Write complete!
+Internet settings
+Change ReiNX splash
+Use pre-defined image
+Game select
+Select theme
+Firmware
+Serial
+Nickname
+Config controllers
+Update console
+Update ReiNX CFW
+Active theme
+Outline
+Different size
+Ps4 style
+Double Row
+Add Folder
+Remove Theme
+Language
+Region
+TimeZone
+Failed to set custom profile picture.
+Delete title
+TV Resolution
+RGB Range
+TV Sound
+Date
+January
+February
+March
+April
+May
+June
+July
+August
+September
+October
+November
+December
+Max folder count has been reached!

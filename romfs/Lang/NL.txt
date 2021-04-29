@@ -1,0 +1,87 @@
+(geen)
+Fout
+Waarschuwing
+Gelukt
+Niet geimplementeerd!
+Aan het spelen
+Begin
+Sluiten
+Open
+Aan
+Uit
+Oke
+Terug
+Ja
+Nee
+Ingeschakeld
+Uitgeschakeld
+Foutcode
+Naam van de map
+Naam instellen
+Map
+Nieuws
+Instellingen
+Je SD is verwijderd! Opnieuw opstarten is vereist.
+Voor het wijzigen van het thema is opnieuw opstarten vereist.
+Map is vol!
+Wilt u de actieve applicatie sluiten?
+Algemene configuratie
+Internet
+Gegevensbeheer
+Gebruikers
+Look and feel
+Thema's
+TV-instellingen
+Systeeminformatie
+Configuraties voor algemene doeleinden.
+Bekijk internetinstellingen.
+Beheer uw gegevens.
+Bewerk gebruikersprofielen.
+Verander de look and feel.
+Verander het huidige thema.
+Beheer je tv-instellingen.
+Console-specifieke informatie.
+Vergrendel scherm
+AutoRCM
+Dit schrijft naar de NAND! Wil je doorgaan?
+Schrijven afgerond!
+Internetinstellingen
+Verander ReiNX-splash
+Gebruik vooraf gedefinieerde afbeelding
+Spel selecteren
+Selecteer thema
+Firmware
+Serienummer
+Bijnaam
+Configureer controllers
+Update console
+Update ReiNX CFW
+Actief thema
+Uitlijning
+Verschillende grootte
+Ps4-stijl
+Dubbele rij
+Map toevoegen
+Thema verwijderen
+Taal
+Regio
+Tijdzone
+Kan aangepaste profielfoto niet instellen.
+Titel verwijderen
+Tv resolutie
+RGB-bereik
+Tv-geluid
+Datum
+januari-
+februari
+maart
+april
+mei
+juni-
+juli-
+augustus
+september
+oktober
+november
+december
+Max folder count has been reached!

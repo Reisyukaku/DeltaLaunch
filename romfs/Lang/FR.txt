@@ -1,0 +1,87 @@
+(aucun)
+Erreur
+Attention
+Succès
+Fonctionnalitée non active !
+En cours
+Démarrer
+Fermeture
+Ouvrir
+ON
+OFF
+OK
+Retour
+Oui
+Non
+Activée
+Désactivé
+Code d'erreur
+Nom de dossier
+Nom choisi.
+Dossier
+Nouvelles
+Paramêtres
+La carte SD à été retiré ! Un redémarrage est nécessaire.
+Le changement de Thème nécessite un redémarrage.
+Le dossier est plein!
+Voulez vous quittez le jeu en cours ?
+Configuration générale
+Internet
+Gestion des données
+Utilisateurs
+Look et style.
+Thèmes
+Paramètres TV
+Information système
+Configurations général.
+Afficher les paramètres Internet.
+Gérez vos données.
+Modifier les profils utilisateur.
+Changer le look et le style.
+Changer le thème actuel.
+Gérez vos paramètres de télévision.
+Informations de la console.
+Ecran de vérouillage
+AutoRCM
+Ceci écrit sur la NAND! Êtes-vous sur de vouloir procéder ?
+Ecriture terminée !
+Paramètres Internet
+Changer le bootscreen de ReiNX
+Utiliser une image prédéfinie
+Sélection du style
+Sélectionnez un thème
+Version du logiciel
+Numéro de série
+Surnom
+Configuration des manettes
+Mise à jour de la console
+Mise à jour de ReiNX
+Thème actif
+Normal
+Différentes tailles
+Style PS4
+Double rangée
+Ajouter un dossier
+Supprimer le thème
+Langue
+Région
+Fuseau horaire
+Impossible de définir une image de profil personnalisée.
+Supprimer le logiciel
+Résolution TV
+Gamme RVB
+Son TV
+Date
+Janvier
+Février
+Mars
+Avril
+Mai
+Juin
+Juillet
+Août
+Septembre
+Octobre
+Novembre
+Décembre
+Max folder count has been reached!

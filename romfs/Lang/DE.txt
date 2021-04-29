@@ -1,0 +1,87 @@
+(keiner)
+Fehler
+Warnung
+Erfolg
+Noch nicht implementiert!
+Aktiver Titel
+Start
+Schließen
+Öffnen
+An
+Aus
+OK
+Zurück
+Ja
+Nein
+Aktiviert
+Deaktiviert
+Fehlercode
+Ordnername
+Name bearbeiten
+Ordner
+Nachrichten
+Einstellungen
+Die Speicherkarte wurde entfernt! Ein Neustart ist erforderlich.
+Die Konsole wird jetzt neugestartet um das neue Design zu übernehmen.
+Ordner ist voll!
+Soll die laufende Anwendung geschlossen werden?
+Allgemein
+Internet
+Datenverwaltung
+Benutzer
+Erscheinungsbild und Handhabung
+Designs
+TV-Einstellungen
+Systeminformationen
+Allgemeine Einstellungen.
+Interneteinstellungen anzeigen.
+Verwalten ihrer Daten.
+Benutzerprofile bearbeiten.
+Anpassen des Erscheinungsbildes und der Handhabung.
+Aktuelles Design ändern.
+Ändern der TV-Einstellungen.
+Konsolenspezifische Informationen.
+Bildschirmsperre
+AutoRCM
+Der NAND wird hiermit beschrieben! Fortfahren?
+Schreiben komplett!
+Interneteinstellungen
+Ändern des ReiNX Begrüßungsbildschirms
+Vordefiniertes Bild verwenden
+Spiel auswählen
+Design auswählen
+Firmware
+Seriennummer
+Spitzname
+Controller konfigurieren
+Konsole aktualisieren
+ReiNX CFW aktualisieren
+Aktives Design
+Umriss
+Andere Größe
+Ps4-Stil
+Zweireihig
+Ordner hinzufügen
+Thema entfernen
+Sprache
+Region
+Zeitzone
+Benutzerdefiniertes Profilbild konnte nicht festgelegt werden.
+Titel löschen
+TV-Auflösung
+RGB-Bereich
+TV-Sound
+Datum
+Januar
+Februar
+März
+April
+Kann
+Juni
+Juli
+August
+September
+Oktober
+November
+Dezember
+Max folder count has been reached!

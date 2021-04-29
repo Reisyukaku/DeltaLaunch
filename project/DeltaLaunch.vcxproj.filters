@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{f84943f0-93d0-41ba-8611-be91678b722b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{ed0dd805-c8c6-4b82-b9d1-8e42536a7064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{3dfa1038-174b-4a65-9c9a-c326f074df65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GL">
+      <UniqueIdentifier>{5283a5d3-c2e5-461d-a891-91feb2ca74a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\Menus">
+      <UniqueIdentifier>{58d861ff-a06f-4bf6-b2c8-c9af99aa770b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI\Popup">
+      <UniqueIdentifier>{c904ebf7-dad7-4c22-8b38-5ac3b1b6c383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Graphics">
+      <UniqueIdentifier>{78c28fcb-0b25-43b4-9f7b-8330e3d67f66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Lang">
+      <UniqueIdentifier>{c066c6b2-3974-44a5-ac55-b6a3a5d50140}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sound">
+      <UniqueIdentifier>{85cc7418-fbcf-4c0f-b8ec-be74320a2843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Graphics\Icons">
+      <UniqueIdentifier>{d182a4c6-459a-4905-bc59-f49890a7c252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Graphics\Overlay">
+      <UniqueIdentifier>{87ac0838-127d-49c3-9ce3-37bdc75d67b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Utils">
+      <UniqueIdentifier>{e1de03c7-d083-4e2a-830b-1aaf2917e70d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Core\Engine.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Core\Graphics.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Core\Threads.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Core\GL\glad.c">
+      <Filter>Source Files\Core\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\Account.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\App.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\Hid.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\Network.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\Power.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\Rnx.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\Settings.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Services\Time.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\UI\Dashboard.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\UI\Game.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\UI\GameFolder.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\UI\NewsMenu.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\UI\SettingsMenu.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\source\Core\Font.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\source\Core\Audio.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Engine.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Graphics.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\ThreadManager.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Threads.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Utils.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\GL\GL.hpp">
+      <Filter>Source Files\Core\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\GL\glad.h">
+      <Filter>Source Files\Core\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\GL\stb_image.h">
+      <Filter>Source Files\Core\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\Account.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\App.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\Hid.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\Network.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\Power.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\Rnx.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\Settings.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Services\Time.hpp">
+      <Filter>Source Files\Services</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Dashboard.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Forms.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Game.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\GameBase.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\GameFolder.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Language.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\NewsMenu.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\SettingsMenu.hpp">
+      <Filter>Source Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Popup\ImageOptionBox.hpp">
+      <Filter>Source Files\UI\Popup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Popup\MessageBox.hpp">
+      <Filter>Source Files\UI\Popup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Popup\OpenFileDialog.hpp">
+      <Filter>Source Files\UI\Popup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Menus\AppletIcon.hpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Menus\Button.hpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Menus\Image.hpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Menus\Menu.hpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Menus\Option.hpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Menus\Panel.hpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\UI\Menus\UIElement.hpp">
+      <Filter>Source Files\UI\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\types.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Font.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\GL\Shader.hpp">
+      <Filter>Source Files\Core\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Debug.hpp">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Utils\INI.hpp">
+      <Filter>Source Files\Core\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\source\Core\Utils\JSON.hpp">
+      <Filter>Source Files\Core\Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\romfs\Graphics\BSOD.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Folder.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Lock.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Menu.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\PopupForm.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\PopupMessage.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\reinxnews.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Wallpaper.png">
+      <Filter>Resource Files\Graphics</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\AlbumButton.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\AlbumButton_select.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\HomebrewButton.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\HomebrewButton_select.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\NewsButton.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\NewsButton_select.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\SettingsButton.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\SettingsButton_select.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\ShopButton.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\ShopButton_select.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\SleepButton.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\SleepButton_select.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\WebButton.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Icons\WebButton_select.png">
+      <Filter>Resource Files\Graphics\Icons</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Overlay\Battery.png">
+      <Filter>Resource Files\Graphics\Overlay</Filter>
+    </Image>
+    <Image Include="..\romfs\Graphics\Overlay\lock_icon.png">
+      <Filter>Resource Files\Graphics\Overlay</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\romfs\Lang\DE.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\EN-GB.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\EN-US.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\ES.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\ES419.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\FR.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\FR-CA.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\IT.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\JA.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\KO.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\NL.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\PT.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\RU.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\ZH-CN.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\ZH-HANS.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\ZH-HANT.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+    <Text Include="..\romfs\Lang\ZH-TW.txt">
+      <Filter>Resource Files\Lang</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\romfs\Sounds\menu_activate.mp3">
+      <Filter>Resource Files\Sound</Filter>
+    </Media>
+    <Media Include="..\romfs\Sounds\menu_back.mp3">
+      <Filter>Resource Files\Sound</Filter>
+    </Media>
+    <Media Include="..\romfs\Sounds\menu_nav.mp3">
+      <Filter>Resource Files\Sound</Filter>
+    </Media>
+    <Media Include="..\romfs\Sounds\sfx_error.mp3">
+      <Filter>Resource Files\Sound</Filter>
+    </Media>
+  </ItemGroup>
+</Project>

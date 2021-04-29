@@ -1,0 +1,87 @@
+(aucun)
+Erreur
+Attention
+Succès
+Non implémenté!
+En jouant
+Début
+Fermeture
+Ouvrir
+Sur
+De
+d'accord
+Retour
+Oui
+Non
+Activée
+désactivé
+Code d'erreur
+Nom de dossier
+Nom du set
+Dossier
+Nouvelles
+Réglages
+Votre carte SD a été supprimée! Un redémarrage est requis.
+Le changement de thème nécessite un redémarrage.
+Le dossier est plein!
+Voulez-vous fermer l'application en cours d'exécution?
+Configuration générale
+l'Internet
+Gestion de données
+Utilisateurs
+Regarde et ressent
+Des thèmes
+Paramètres TV
+Information système
+Configurations à usage général.
+Afficher les paramètres Internet.
+Gérez vos données.
+Modifier les profils utilisateur.
+Changer le look et la sensation.
+Changer le thème actuel.
+Gérez vos paramètres de télévision.
+Informations spécifiques à la console.
+Écran verrouillé
+AutoRCM
+Cela écrit à la NAND! Voulez-vous poursuivre?
+Ecrire complète!
+Paramètres Internet
+Changer le splash de ReiNX
+Utiliser une image prédéfinie
+Sélection du jeu
+Sélectionne un thème
+Micrologiciel
+En série
+Surnom
+Contrôleurs de configuration
+Console de mise à jour
+Mise à jour de ReiNX CFW
+Thème actif
+Contour
+Différentes tailles
+Style ps4
+Double rangée
+Ajouter le dossier
+Supprimer le thème
+La langue
+Région
+Fuseau horaire
+Impossible de définir une image de profil personnalisée.
+Supprimer le titre
+Résolution TV
+Gamme RVB
+Son TV
+Rendez-vous amoureux
+janvier
+février
+Mars
+avril
+Mai
+juin
+juillet
+août
+septembre
+octobre
+novembre
+décembre
+Max folder count has been reached!

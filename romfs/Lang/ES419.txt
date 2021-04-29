@@ -1,0 +1,87 @@
+(ninguna)
+Error
+Advertencia
+Éxito
+No implementado!
+Jugando
+comienzo
+Clausura
+Abierto
+En
+Apagado
+Bueno
+atrás
+Sí
+No
+Habilitado
+Discapacitado
+Código de error
+Nombre de la carpeta
+Escoger un nombre
+Carpeta
+Noticias
+Ajustes
+Su SD ha sido eliminado! Se requiere un reinicio.
+El cambio de tema requiere un reinicio.
+¡La carpeta está llena!
+¿Quieres cerrar la aplicación en ejecución?
+Configuración general
+Internet
+Gestión de datos
+Usuarios
+Mira y siente
+Temas
+Configuraciones de TV
+Información del sistema
+Configuraciones de uso general.
+Ver la configuración de internet.
+Gestiona tus datos.
+Editar perfiles de usuario.
+Cambiar el aspecto y la sensación.
+Cambiar el tema actual.
+Administra tus configuraciones de TV.
+Información específica de la consola.
+Bloquear pantalla
+AutoRCM
+¡Esto le escribe a la NAND! Quieres proceder?
+Escribe completa!
+Ajustes de internet
+Cambiar ReiNX Splash
+Usar imagen predefinida
+Selección de juego
+Seleccione el tema
+Firmware
+De serie
+Apodo
+Controladores de configuración
+Consola de actualización
+Actualizar ReiNX CFW
+Tema activo
+contorno
+Diferente tamaño
+Estilo ps4
+Doble fila
+Agregar carpeta
+Quitar tema
+Idioma
+Región
+Zona horaria
+Error al establecer la imagen de perfil personalizada.
+Eliminar título
+Resolución de televisión
+Rango RGB
+Sonido de TV
+Fecha
+enero
+febrero
+marzo
+abril
+Mayo
+junio
+julio
+agosto
+septiembre
+octubre
+noviembre
+diciembre
+Max folder count has been reached!
