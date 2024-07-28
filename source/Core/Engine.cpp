@@ -15,7 +15,7 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "Engine.hpp"
+#include <Core/Engine.hpp>
 
 EngineState Engine::State = STATE_DASHBOARD;
 UI::MessageBox* UI::MessageBox::instance = nullptr;
@@ -36,32 +36,20 @@ Engine::Engine(u32 width, u32 height) {
     screenPos.h = height;
     running = true;
     
-#ifdef __SWITCH__
 	nifmInitialize(NifmServiceType_System);
 	
     //Load romfs
-    if(R_FAILED(romfsMountFromFsdev("/ReiNX/titles/0100000000001000/romfs.bin", 0, "romfs")))
-        if(R_FAILED(romfsMountFromFsdev("/sxos/titles/0100000000001000/romfs.bin", 0, "romfs")))
-            romfsMountFromFsdev("/atmosphere/titles/0100000000001000/romfs.bin", 0, "romfs");*/
-    
-    if(!Rnx::IsUsingReiNX())
-        Rnx::SetHbTidForDelta(0x010000000000100F);
-#else
-	//Create needed Dirs
-	if (!CreateDirectory(SD("").c_str(), NULL)) ERROR(Debug::Type::ENGINE, "Failed to create dir `%s`\n", SD("").c_str());
-	if (!CreateDirectory(SD("/ReiNX").c_str(), NULL)) ERROR(Debug::Type::ENGINE, "Failed to create dir `%s`\n", SD("/ReiNX").c_str());
-#endif
-
+    romfsMountFromFsdev("/atmosphere/titles/0100000000001000/romfs.bin", 0, "romfs");
 }
 
 Engine::~Engine() {
 	delete frndThread;
 	delete samsThread;
     delete dash;
-#ifdef __SWITCH__
+
     romfsExit();
 	nifmExit();
-#endif
+
     Graphics::Exit();
 }
 
@@ -70,11 +58,9 @@ void Engine::Initialize() {
     Settings::SetLockIconEnabled(true);
     
     State = (Settings::GetLockScreenFlag() ? STATE_LOCKSCREEN : STATE_DASHBOARD);
-    
-#ifdef __SWITCH__
+
     appletLoadAndApplyIdlePolicySettings();
     //appletAllowToEnterSleep();
-#endif
 
 	//Start threads
     frndThread = new ThreadManager(Threads::FriendThread);

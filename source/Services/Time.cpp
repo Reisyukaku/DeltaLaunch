@@ -15,7 +15,7 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "Time.hpp"
+#include <Services/Time.hpp>
 
 std::string Time::GetClock(ClockType type) {
     u64 time = 0;

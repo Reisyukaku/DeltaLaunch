@@ -15,7 +15,7 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "Dashboard.hpp"
+#include <UI/Dashboard.hpp>
 
 Dashboard::Dashboard(u32 width, u32 height) {
     WindowPos.x=WindowPos.y=0; 
@@ -418,7 +418,7 @@ void Dashboard::DrawGames() {
     for(auto entry : GameEntries) {
 		if (entry->IsInFolder()) continue;
         gameArea.x = GameIconArea.x + (i * (gamePicSize+gameSpacing));
-        bool isPlaying = (App::currentApplication.active == true && App::currentApplication.tid == entry->GetTitleID());
+        bool isPlaying = false;//(App::currentApplication.active == true && App::currentApplication.tid == entry->GetTitleID());
         switch(Settings::gameSelType) {
             //Classic outline format
             default:
@@ -715,11 +715,11 @@ void Dashboard::ActivateDash() {
     if(App::dashLayer > 0) {
         
         //Boot game if nothings running
-        if(!App::currentApplication.active || GameEntries[App::gameSelectInd]->IsFolder()) {
+        if(/*!App::currentApplication.active || GameEntries[App::gameSelectInd]->IsFolder()*/ false) {
             rc = GameEntries[App::gameSelectInd]->Run();
         }
         //Close game if you're trying to launch a different game
-        else if(App::currentApplication.active && App::currentApplication.tid != GameEntries[App::gameSelectInd]->GetTitleID()) {
+        else if(/*App::currentApplication.active && App::currentApplication.tid != GameEntries[App::gameSelectInd]->GetTitleID()*/ false) {
             if(msgBox->Show(lang->GetString(LANG_CLOSING), lang->GetString(LANG_CLOSE_APP), MSGBOX_YESNO) == RESULT_YES) {
                 App::CloseGame();
                 rc = GameEntries[App::gameSelectInd]->Run();
@@ -752,7 +752,7 @@ void Dashboard::SelectGame(GameBase *gbase, s32 ind) {
 }
 
 void Dashboard::CloseApp() {
-    if(App::currentApplication.active && App::currentApplication.tid == GameEntries[App::gameSelectInd]->GetTitleID()) {
+    if(/*App::currentApplication.active && App::currentApplication.tid == GameEntries[App::gameSelectInd]->GetTitleID()*/ false) {
         if(msgBox->Show(lang->GetString(LANG_CLOSING), lang->GetString(LANG_CLOSE_APP), MSGBOX_YESNO) == RESULT_YES) {
             App::CloseGame();
         }

@@ -1,6 +1,6 @@
 #include <string.h>
 #include <malloc.h>
-#include "Font.hpp"
+#include <Core/Font.hpp>
 
 Fonts g_fonts;
 FT_Library* g_library = NULL;
@@ -50,19 +50,7 @@ FT_Face Fonts::open(u32 languageCode, int sizeIndex) {
 	else if (languageCode == Font::HINDI) m_fonts[languageCode][sizeIndex] = TTF_OpenFont(RESOURCES("/fonts/hind.ttf").c_str());
 	else*/
 	{
-#ifdef __SWITCH__
 		m_fonts[languageCode][sizeIndex] = TTF_OpenFontRW((u8*)m_fontData[fi].address, m_fontData[fi].size);
-#else
-		switch (languageCode)
-		{
-		case Font::Extended: m_fonts[languageCode][sizeIndex] = TTF_OpenFont("./Fonts/FontNintendoExtended.ttf"); break;
-		case Font::Chinese_Simplified: m_fonts[languageCode][sizeIndex] = TTF_OpenFont("./Fonts/FontChineseSimplified.ttf"); break;
-		case Font::Chinese_Traditional: m_fonts[languageCode][sizeIndex] = TTF_OpenFont("./Fonts/FontChineseTraditional.ttf"); break;
-		case Font::Chinese_Simplified_Extended: m_fonts[languageCode][sizeIndex] = TTF_OpenFont("./Fonts/FontExtendedChineseSimplified.ttf"); break;
-		case Font::Korean: m_fonts[languageCode][sizeIndex] = TTF_OpenFont("./Fonts/FontChineseSimplified.ttf"); break;
-		default: m_fonts[languageCode][sizeIndex] = TTF_OpenFont("./Fonts/FontStandard.ttf");
-		}
-#endif
 	}
 	return m_fonts[languageCode][sizeIndex];
 }

@@ -15,38 +15,32 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "Power.hpp"
+#include <Services/Power.hpp>
 
 Result Power::Shutdown() {
-    #ifdef __SWITCH__
     appletSetHandlesRequestToDisplay(false);
 	appletStartShutdownSequence();    
-    #endif
     return 0;
 }
 
 Result Power::Reboot() {
-    #ifdef __SWITCH__
     appletSetHandlesRequestToDisplay(false);
 	appletStartRebootSequence();
-    #endif
     return 0;
 }
 
 Result Power::Sleep() {
-    #ifdef __SWITCH__
     appletSetHandlesRequestToDisplay(false);
     appletStartSleepSequence(true);
-    #endif
     return 0;
 }
 
 u32 Power::GetBatteryLife() {
 	u32 pwr = 100;
-    #ifdef __SWITCH__
+
     psmInitialize();
 	psmGetBatteryChargePercentage(&pwr);
     psmExit();
-    #endif
+
 	return pwr;
 }

@@ -15,7 +15,7 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "Game.hpp"
+#include <UI/Game.hpp>
 
 Game::Game(u64 tid) : GameBase(tid) {
     //

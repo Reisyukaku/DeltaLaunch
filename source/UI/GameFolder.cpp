@@ -15,7 +15,7 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "GameFolder.hpp"
+#include <UI/GameFolder.hpp>
 
 GameFolder::GameFolder(u32 folderID, std::string name, Texture *ico) : GameBase(folderID) {
     optBox = UI::ImageOptionBox::getInstance();

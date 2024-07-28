@@ -15,23 +15,19 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "Account.hpp"
+#include <Services/Account.hpp>
 
 s32 Account::GetUserCount() {
     s32 cnt = 0;
-    #ifdef __SWITCH__
     accountGetUserCount(&cnt);
-    #endif
     return cnt;
 }
 
 AccountUid Account::GetActiveAccount() {
 	AccountUid userID;
-    #ifdef __SWITCH__
 	Result rc = accountGetLastOpenedUser(&userID);
     if(R_FAILED(rc) || !accountUidIsValid(&userID))
         userID = App::LaunchPSelect();
-    #endif
 	return userID;
 }
 
@@ -39,10 +35,8 @@ AccountUid Account::GetActiveAccount() {
 AccountUid Account::GetFirstAccount() {
     AccountUid userIDs[MAX_USERS];
     s32 total = 0;
-    #ifdef __SWITCH__
     accountInitialize(AccountServiceType_System);
     accountListAllUsers(userIDs, MAX_USERS, &total);
-    #endif
     return userIDs[0];
 }
 
@@ -50,7 +44,7 @@ Result Account::SetCustomProfileImage(std::string filename) {
 	Result rc = -1;
 	std::ifstream pfp(filename.c_str());
 	if (pfp.good()) {
-/*#ifdef __SWITCH__
+/*
 		accountInitialize(AccountServiceType_System);
 		AccountUid uid = Account::GetFirstAccount();
 		size_t fsize = 0;
@@ -74,26 +68,21 @@ Result Account::SetCustomProfileImage(std::string filename) {
 		rc = accStoreWithImage(&acc, &pb, &ud, (u8*)buf, fsize);
 		accountProfileClose(&acc);
 		delete buf;
-#else*/
-		rc = 0;
-//#endif
+*/
 	}
     return rc;
 }
 
 AccountUid Account::TryGetUser() {
     AccountUid userID;
-    #ifdef __SWITCH__
     Result rc = accountTrySelectUserWithoutInteraction(&userID, false);
     if(R_FAILED(rc) || !accountUidIsValid(&userID))
         userID = App::LaunchPSelect();
-    #endif
     return userID;
 }
 
 Texture *Account::GetProfileImage(AccountUid userID) {
 	Texture *tex = nullptr;
-#ifdef __SWITCH__
     if(accountUidIsValid(&userID)) {
         AccountProfile acc;
         u32 imgSize = 0;
@@ -104,8 +93,6 @@ Texture *Account::GetProfileImage(AccountUid userID) {
         tex = Graphics::CreateTexFromBuffer(buf, imgSize);
         accountProfileClose(&acc);
     }
-#else
-	tex = new Texture;
-#endif
+
     return tex;
 }

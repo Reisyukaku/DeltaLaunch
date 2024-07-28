@@ -20,12 +20,11 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdint.h>
-#include "Core/types.h"
-#include "Core/types.h"
+#include <Core/types.h>
+#include <Core/types.h>
 
-#include "Core/Engine.hpp"
+#include <Core/Engine.hpp>
 
-#ifdef __SWITCH__
 extern "C"{
     u32 __nx_applet_type = AppletType_SystemApplet;
     size_t __nx_heap_size = 0xD000000;
@@ -40,7 +39,6 @@ void userAppInit(void) {
     setInitialize();
     setsysInitialize();
     accountInitialize(AccountServiceType_System);
-    Rnx::Initialize();
 }
 
 void userAppExit(void) {
@@ -49,9 +47,7 @@ void userAppExit(void) {
     setExit();
     setsysExit();
     accountExit();
-    Rnx::Exit();
 }
-#endif
 
 int main(int argc, char* argv[]) {
     //Qlaunch loop

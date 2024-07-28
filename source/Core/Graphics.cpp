@@ -17,7 +17,7 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "GL/stb_image.h"
-#include "Graphics.hpp"
+#include <Core/Graphics.hpp>
 
 GLFWwindow *GL::Window;
 RGBA Graphics::selectCol;
@@ -35,17 +35,13 @@ void Graphics::Init(Rect pos) {
     GL::Init(Screen);
     
     //Foreground
-#ifdef __SWITCH__
     appletRequestToGetForeground();
     appletSetHandlesRequestToDisplay(true);
-#endif
 }
 
 void Graphics::Exit() {
 	DEBUG(Debug::Type::GFX, "Exit.\n");
-#ifdef __SWITCH__
     appletSetHandlesRequestToDisplay(false);
-#endif
     GL::Quit();
 }
 

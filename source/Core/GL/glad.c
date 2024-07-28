@@ -107,14 +107,6 @@ void close_gl(void) {
         libGL = NULL;
     }
 }
-#elif !defined(__SWITCH__)
-#include <dlfcn.h>
-static void* libGL;
-
-#if !defined(__APPLE__) && !defined(__HAIKU__)
-typedef void* (APIENTRYP PFNGLXGETPROCADDRESSPROC_PRIVATE)(const char*);
-static PFNGLXGETPROCADDRESSPROC_PRIVATE gladGetProcAddressPtr;
-#endif
 
 static
 int open_gl(void) {

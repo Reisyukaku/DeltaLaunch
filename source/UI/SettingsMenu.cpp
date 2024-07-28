@@ -15,7 +15,7 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "SettingsMenu.hpp"
+#include <UI/SettingsMenu.hpp>
 
 SettingsMenu::SettingsMenu(Rect pos, Texture *bg) : Menu(pos, bg, LANG_SETTINGS){
 	//Panel location

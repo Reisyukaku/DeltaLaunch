@@ -15,8 +15,8 @@
 * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 */
 
-#include "NewsMenu.hpp"
-#include "../Core/Utils/JSON.hpp"
+#include <UI/NewsMenu.hpp>
+#include <Core/Utils/JSON.hpp>
 
 NewsMenu::NewsMenu(Rect pos, Texture *bg, Texture *article) : Menu(pos, bg, LANG_NEWS){
 	panX = 450;
