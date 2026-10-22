@@ -25,9 +25,7 @@ public:
 	};
 
 	static void Write(unsigned col, Type type, std::string fmt, ...) {
-#if !defined(__SWITCH__)
-		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), col);
-#endif
+
 		va_list args;
 		char string[0x100];
 		va_start(args, fmt);
@@ -35,9 +33,7 @@ public:
 		va_end(args);
 
 		std::vector<std::string> MsgHdr{ "", "Dashboard", "Audio" , "Engine", "Font", "Applet" ,"Gfx" ,"GLFW" ,"Hid" ,"Network" ,"Settings", "ThreadManager", "Game", "Shader" };
-		printf(("[" + MsgHdr[(int)type] + "]: " + string).c_str());
-#ifdef __DEBUG__
-		consoleUpdate(NULL);
-#endif
+		printf("[%s]: %s", MsgHdr[(int)type].c_str(), string);
+
 	}
 };

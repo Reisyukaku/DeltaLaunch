@@ -19,30 +19,24 @@
 
 s32 Account::GetUserCount() {
     s32 cnt = 0;
-    #ifdef __SWITCH__
     accountGetUserCount(&cnt);
-    #endif
     return cnt;
 }
 
 AccountUid Account::GetActiveAccount() {
-	AccountUid userID;
-    #ifdef __SWITCH__
+	AccountUid userID = {};
 	Result rc = accountGetLastOpenedUser(&userID);
     if(R_FAILED(rc) || !accountUidIsValid(&userID))
         userID = App::LaunchPSelect();
-    #endif
 	return userID;
 }
 
 #define MAX_USERS 8
 AccountUid Account::GetFirstAccount() {
-    AccountUid userIDs[MAX_USERS];
+    AccountUid userIDs[MAX_USERS] = {};
     s32 total = 0;
-    #ifdef __SWITCH__
     accountInitialize(AccountServiceType_System);
     accountListAllUsers(userIDs, MAX_USERS, &total);
-    #endif
     return userIDs[0];
 }
 
@@ -50,50 +44,22 @@ Result Account::SetCustomProfileImage(std::string filename) {
 	Result rc = -1;
 	std::ifstream pfp(filename.c_str());
 	if (pfp.good()) {
-/*#ifdef __SWITCH__
-		accountInitialize(AccountServiceType_System);
-		AccountUid uid = Account::GetFirstAccount();
-		size_t fsize = 0;
-		pfp.seekg(0, pfp.end);
-		fsize = pfp.tellg();
-		pfp.seekg(0, pfp.beg);
-		char *buf = new char[fsize]{0};
-		pfp.read(buf, fsize);
-		pfp.close();
-		AccountProfile acc;
-		AccountProfileBase pb;
-		AccountUserData ud;
-		rc = accountGetProfile(&acc, uid);
-		if (R_FAILED(rc)) return rc;
-		rc = accountProfileGet(&acc, &ud, &pb);
-		if (R_FAILED(rc)) return rc;
-		ud.iconID = 0;
-
-		rc = accountGetProfileEditor(&acc, uid);
-		if (R_FAILED(rc)) return rc;
-		rc = accStoreWithImage(&acc, &pb, &ud, (u8*)buf, fsize);
-		accountProfileClose(&acc);
-		delete buf;
-#else*/
 		rc = 0;
-//#endif
+
 	}
     return rc;
 }
 
 AccountUid Account::TryGetUser() {
-    AccountUid userID;
-    #ifdef __SWITCH__
+    AccountUid userID = {};
     Result rc = accountTrySelectUserWithoutInteraction(&userID, false);
     if(R_FAILED(rc) || !accountUidIsValid(&userID))
         userID = App::LaunchPSelect();
-    #endif
     return userID;
 }
 
 Texture *Account::GetProfileImage(AccountUid userID) {
 	Texture *tex = nullptr;
-#ifdef __SWITCH__
     if(accountUidIsValid(&userID)) {
         AccountProfile acc;
         u32 imgSize = 0;
@@ -103,9 +69,7 @@ Texture *Account::GetProfileImage(AccountUid userID) {
         accountProfileLoadImage(&acc, buf, imgSize, &imgSize);
         tex = Graphics::CreateTexFromBuffer(buf, imgSize);
         accountProfileClose(&acc);
+        free(buf);
     }
-#else
-	tex = new Texture;
-#endif
     return tex;
 }

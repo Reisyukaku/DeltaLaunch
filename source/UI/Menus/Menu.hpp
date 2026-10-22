@@ -136,10 +136,10 @@ class Menu
             Draw();
             if(Panels.size() > 0) currLayer = Panels[menuOpt]->Update(currLayer);
             
-            if(Hid::Input & KEY_A) rc = Activate();
-            if(Hid::Input & KEY_DUP) DecrementSelect();
-            if(Hid::Input & KEY_DDOWN) IncrementSelect();
-            if(Hid::Input & KEY_B) Back();
+            if(Hid::Input & HidNpadButton_A) rc = Activate();
+            if(Hid::Input & HidNpadButton_Up) DecrementSelect();
+            if(Hid::Input & HidNpadButton_Down) IncrementSelect();
+            if(Hid::Input & HidNpadButton_B) Back();
             
             return rc;
         }

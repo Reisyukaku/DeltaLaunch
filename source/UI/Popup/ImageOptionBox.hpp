@@ -99,15 +99,15 @@ namespace UI {
 			}
 
 			//Hid input
-			if (Hid::Input & KEY_LEFT)
+			if (Hid::Input & HidNpadButton_AnyLeft)
 				selected = (selected <= 0) ? 0 : selected - 1;
-			if (Hid::Input & KEY_RIGHT)
+			if (Hid::Input & HidNpadButton_AnyRight)
 				selected = (selected >= (int)Images.size() - 1) ? (int)Images.size() - 1 : selected + 1;
-			if (Hid::Input & KEY_A) {
+			if (Hid::Input & HidNpadButton_A) {
 				Audio::Play(SFX_Activate);
 				return 0;
 			}
-			if (Hid::Input & KEY_B) {
+			if (Hid::Input & HidNpadButton_B) {
 				selected = -1;
 				return 0;
 			}

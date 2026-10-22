@@ -59,6 +59,9 @@ class App
         static Result CommandHandler(u32 cmd);
 		
 		static AppletApplication currentApplication;
+        static bool applicationActive;
+        static u64 applicationId;
+        static bool appletActive;
         static AppletHolder currentApplet;
         static s32 gameSelectInd;
         static s32 appletSelectInd;

@@ -22,11 +22,6 @@ UI::MessageBox* UI::MessageBox::instance = nullptr;
 UI::ImageOptionBox* UI::ImageOptionBox::instance = nullptr;
 UI::OpenFileDialog* UI::OpenFileDialog::instance = nullptr;
 Language* Language::instance = nullptr;
-Mix_Music *Audio::bgm;
-Mix_Music *Audio::navSound;
-Mix_Music *Audio::activate;
-Mix_Music *Audio::back;
-Mix_Music *Audio::error;
 
 Engine::Engine(u32 width, u32 height) {
     //Setup vars
@@ -36,32 +31,25 @@ Engine::Engine(u32 width, u32 height) {
     screenPos.h = height;
     running = true;
     
-#ifdef __SWITCH__
 	nifmInitialize(NifmServiceType_System);
 	
     //Load romfs
     if(R_FAILED(romfsMountFromFsdev("/ReiNX/titles/0100000000001000/romfs.bin", 0, "romfs")))
         if(R_FAILED(romfsMountFromFsdev("/sxos/titles/0100000000001000/romfs.bin", 0, "romfs")))
-            romfsMountFromFsdev("/atmosphere/titles/0100000000001000/romfs.bin", 0, "romfs");*/
+            romfsMountFromFsdev("/atmosphere/titles/0100000000001000/romfs.bin", 0, "romfs");
     
     if(!Rnx::IsUsingReiNX())
         Rnx::SetHbTidForDelta(0x010000000000100F);
-#else
-	//Create needed Dirs
-	if (!CreateDirectory(SD("").c_str(), NULL)) ERROR(Debug::Type::ENGINE, "Failed to create dir `%s`\n", SD("").c_str());
-	if (!CreateDirectory(SD("/ReiNX").c_str(), NULL)) ERROR(Debug::Type::ENGINE, "Failed to create dir `%s`\n", SD("/ReiNX").c_str());
-#endif
 
 }
 
 Engine::~Engine() {
 	delete frndThread;
 	delete samsThread;
+    delete aemThread;
     delete dash;
-#ifdef __SWITCH__
     romfsExit();
 	nifmExit();
-#endif
     Graphics::Exit();
 }
 
@@ -71,10 +59,8 @@ void Engine::Initialize() {
     
     State = (Settings::GetLockScreenFlag() ? STATE_LOCKSCREEN : STATE_DASHBOARD);
     
-#ifdef __SWITCH__
     appletLoadAndApplyIdlePolicySettings();
     //appletAllowToEnterSleep();
-#endif
 
 	//Start threads
     frndThread = new ThreadManager(Threads::FriendThread);
@@ -104,6 +90,8 @@ void Engine::Clear() {
 }
 
 void Engine::Update() {
+    glfwPollEvents();
+    if (glfwWindowShouldClose(GL::Window)) { running = false; return; }
     Hid::KeyProcess();
     Hid::TouchProcess();
 
@@ -118,7 +106,7 @@ void Engine::Update() {
         case STATE_LOCKSCREEN:
         {
             dash->DrawLockScreen();
-            if((Hid::Input & KEY_A) || Hid::IsTouched()) 
+            if((Hid::Input & HidNpadButton_A) || Hid::IsTouched())
                 State = STATE_DASHBOARD;
             break;
         }

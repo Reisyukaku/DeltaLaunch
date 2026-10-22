@@ -3,7 +3,3 @@
 
 *A Qlaunch rewrite for ReiNX*
 
-
-**Compiling:**
-
-You'll need latest devkitpro and switch-glfw and switch-sdl2.

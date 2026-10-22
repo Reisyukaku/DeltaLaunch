@@ -38,7 +38,7 @@ class Game: public GameBase
         void SetName(std::string name) { Name = name; }
         std::string GetAuthor() { return Author; }
         void SetAuthor(std::string author) { Author = author; }
-        bool IsRunning() override { return App::currentApplication.active && App::currentApplication.tid == TitleID; }
+        bool IsRunning() override { return App::applicationActive && App::applicationId == TitleID; }
         
         Result Run() override;
         Result DrawOptions() override;
@@ -57,7 +57,6 @@ class Game: public GameBase
         }
         Result BackupSave(){
             Result rc = 0;
-#ifdef __SWITCH__
             rc = MountSave();
             if(R_SUCCEEDED(rc)) {
                 std::stringstream stream; stream << std::setfill ('0') << std::setw(16) << std::hex << std::uppercase << TitleID;
@@ -84,13 +83,11 @@ class Game: public GameBase
                 else
                     msgBox->Show(lang->GetString(LANG_ERROR), lang->GetString(LANG_ERROR) + ": " + std::to_string(rc));
             }
-#endif
             
             return rc;
         }
         Result RestoreSave(){
             Result rc = 0;
-#ifdef __SWITCH__
             std::stringstream stream; stream << std::setfill ('0') << std::setw(16) << std::hex << std::uppercase << TitleID;
             fs::path titlePath = fs::path(std::string(SAVE_PATH) + "/") / fs::path(stream.str());
             if(fs::exists(titlePath)) {
@@ -100,14 +97,12 @@ class Game: public GameBase
                     UnmountSave();
                 }
             }
-#endif
             
             return rc;
         }
         
         Result MountSave() {
             Result rc = 0;
-#ifdef __SWITCH__
             FsFileSystem out;
             
             if(IsRunning()) {
@@ -121,14 +116,11 @@ class Game: public GameBase
             rc = fsOpen_SaveData(&out, TitleID, uid);
             if(R_SUCCEEDED(rc)) 
                 rc = fsdevMountDevice("save", out);
-#endif
             return rc;
         }
         
         Result UnmountSave() {
-#ifdef __SWITCH__
             fsdevUnmountDevice("save");
-#endif
             return 0;
         }
 };

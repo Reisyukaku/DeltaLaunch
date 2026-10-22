@@ -64,10 +64,10 @@ Result GameFolder::Run() {
             optBox->AddOption(Games[i]->GetIcon(), Games[i]->GetName());
         int opt = optBox->Show(Name);
         if(opt >= 0) {
-            if(!App::currentApplication.active) {
+            if(!App::applicationActive) {
                 rc = Games[opt]->Run();
             }
-            else if(App::currentApplication.active && Games[opt]->GetTitleID() != App::currentApplication.tid) {
+            else if(App::applicationActive && Games[opt]->GetTitleID() != App::applicationId) {
                 App::CloseGame();
                 rc = Games[opt]->Run();
             }

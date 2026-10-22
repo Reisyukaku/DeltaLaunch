@@ -1,0 +1,7 @@
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential cmake pkg-config libglfw3-dev libfreetype6-dev libsdl2-dev \
+    libsdl2-mixer-dev libcurl4-openssl-dev libgl1-mesa-dri xvfb xauth \
+    && rm -rf /var/lib/apt/lists/*
+WORKDIR /work
+CMD ["make", "linux-test", "LINUX_BUILD=build-linux-docker"]

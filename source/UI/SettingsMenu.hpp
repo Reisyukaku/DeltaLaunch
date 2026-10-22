@@ -120,9 +120,9 @@ class SettingsMenu: public Menu
                 msgBox->Show(lang->GetString(LANG_WARNING), lang->GetString(LANG_THEME_CHANGE));
                 Power::Reboot();
 				//TODO make work on switchyboi
-#if !defined(__SWITCH__)
+
 				Settings::reloadTheme = true;
-#endif
+
             }
             return rc;
         }

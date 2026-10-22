@@ -17,6 +17,7 @@
 
 #pragma once
 #include <functional>
+#include <atomic>
 #include "../Core/types.h"
 
 class ThreadManager {
@@ -42,23 +43,19 @@ class ThreadManager {
 		}
 
 		void join(){
-#ifdef  __SWITCH__
 			if (!threadFinished())
 				threadWaitForExit(&t);
 			threadClose(&t);
-#endif
 		}
 
 		bool start(u32 threadOffset = 1, u8 priority = 0x3B) {
 			DEBUG(Debug::Type::THREAD, "Starting thread..\n");
-#ifdef __SWITCH__
 			memset(&t, 0, sizeof(t));
 			if (threadCreate(&t, (void(*)(void*))&__threadEntry, this, NULL, 0x20000, priority, (svcGetCurrentProcessorNumber() + threadOffset) % 4))
 				return false;
 
 			if (threadStart(&t))
 				return false;
-#endif
 			return true;
 		}
 
@@ -81,19 +78,19 @@ class ThreadManager {
 				return;
 			}
 
-			while (p->shouldRun() && p->step()) {}
+			while (p->shouldRun() && p->step()) { svcSleepThread(1000000); }
 
 			p->exit();
 			p->threadFinished() = true;
 		}
 
-		bool& shouldRun() { return m_shouldRun;	}
-		bool& threadFinished() { return m_theadExited; }
+		std::atomic_bool& shouldRun() { return m_shouldRun;	}
+		std::atomic_bool& threadFinished() { return m_theadExited; }
 		std::function<bool()>& callback() { return m_callback; }
 
 	protected:
 		std::function<bool()> m_callback;
-		bool m_shouldRun;
-		bool m_theadExited;
+		std::atomic_bool m_shouldRun;
+		std::atomic_bool m_theadExited;
 		Thread t;
 };

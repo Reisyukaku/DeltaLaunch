@@ -125,11 +125,11 @@ namespace UI {
 			}
 
 			//Hid input
-			if (Hid::Input & KEY_LEFT)
+			if (Hid::Input & HidNpadButton_AnyLeft)
 				selected = (selected >= Buttons.size() - 1) ? (u8)Buttons.size() - 1 : selected + 1;
-			if (Hid::Input & KEY_RIGHT)
+			if (Hid::Input & HidNpadButton_AnyRight)
 				selected = (selected == 0) ? 0 : selected - 1;
-			if (Hid::Input & KEY_A) {
+			if (Hid::Input & HidNpadButton_A) {
 				Audio::Play(SFX_Activate);
 				MsgResult = (DialogResult)Buttons[selected].Run();
 				return 0;

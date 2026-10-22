@@ -70,7 +70,7 @@ public:
 	virtual Result DrawOptions() { return 0; }
 	Result ShowOptions() {
 		Result rc = DrawOptions();
-		if (Hid::Input & KEY_B) {
+		if (Hid::Input & HidNpadButton_B) {
 			//delete menu;
 			//menu = nullptr;
 			rc = 1;

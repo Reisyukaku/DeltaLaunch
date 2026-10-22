@@ -67,6 +67,7 @@ class GL {
 			DEBUG(Debug::Type::GL, "Init.\n");
             if (!glfwInit()) {
 				ERROR(Debug::Type::GL, "ERROR - Failed Init!\n");
+                std::exit(EXIT_FAILURE);
             }
             
             //GL attributes
@@ -79,12 +80,13 @@ class GL {
             Window = glfwCreateWindow(viewport.w, viewport.h, "DeltaLaunch", nullptr, nullptr);
 			if (!Window) {
 				ERROR(Debug::Type::GL, "Failed to create window\n");
-				Quit();
+				glfwTerminate();
+                std::exit(EXIT_FAILURE);
 			}
             
             //Create contex
-            glfwSwapInterval(1);
             glfwMakeContextCurrent(Window);
+            glfwSwapInterval(1);
             gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
 			DEBUG(Debug::Type::GL, "GL Vendor: %s\n", glGetString(GL_VENDOR));

@@ -21,11 +21,9 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "Core/types.h"
-#include "Core/types.h"
 
 #include "Core/Engine.hpp"
 
-#ifdef __SWITCH__
 extern "C"{
     u32 __nx_applet_type = AppletType_SystemApplet;
     size_t __nx_heap_size = 0xD000000;
@@ -51,9 +49,15 @@ void userAppExit(void) {
     accountExit();
     Rnx::Exit();
 }
-#endif
 
 int main(int argc, char* argv[]) {
+    Platform::Runtime runtime(userAppInit, userAppExit);
+    unsigned long frames = 0;
+    if (argc == 3 && std::string(argv[1]) == "--frames") {
+        char* end = nullptr;
+        frames = strtoul(argv[2], &end, 10);
+        if (!frames || *end || argv[2][0] == '-') return 2;
+    }
     //Qlaunch loop
     Engine eng(1280, 720);
     eng.Initialize();
@@ -61,6 +65,7 @@ int main(int argc, char* argv[]) {
         eng.Clear();
         eng.Update();
         eng.Render();
+        if (frames && --frames == 0) eng.running = false;
     }
     
     return 0;

@@ -17,36 +17,26 @@
 
 #include "Rnx.hpp"
 
-#ifdef __SWITCH__
 static Service g_rnxSrv;
-#endif
 
 bool Rnx::IsUsingReiNX() {
-    #ifdef __SWITCH__
     if (serviceIsActive(&g_rnxSrv)) return true;
-    #endif
     return false;
 }
 
 Result Rnx::Initialize() {
     Result rc = 0;
-    #ifdef __SWITCH__
     if (serviceIsActive(&g_rnxSrv)) return 0;
     rc = smGetService(&g_rnxSrv, "rnx");
-    #endif
     return rc;
 }
 
 void Rnx::Exit() {
-    #ifdef __SWITCH__
     serviceClose(&g_rnxSrv);
-    #endif
 }
 
 Result Rnx::SetHbTidForDelta(u64 tid) {
     Result rc = 0;
-    #ifdef __SWITCH__
     rc = serviceDispatchIn(&g_rnxSrv, 0, tid);
-    #endif
     return rc;
 }

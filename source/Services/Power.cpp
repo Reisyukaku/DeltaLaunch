@@ -1,11 +1,11 @@
 /*
 * ΔLaunch
 * Copyright (c) 2018-2019, Reisyukaku
-* 
+*
 * Permission to use, copy, modify, and/or distribute this software for any
 * purpose with or without fee is hereby granted, provided that the above
 * copyright notice and this permission notice appear in all copies.
-* 
+*
 * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
@@ -18,35 +18,24 @@
 #include "Power.hpp"
 
 Result Power::Shutdown() {
-    #ifdef __SWITCH__
     appletSetHandlesRequestToDisplay(false);
-	appletStartShutdownSequence();    
-    #endif
-    return 0;
+	return appletStartShutdownSequence();
 }
 
 Result Power::Reboot() {
-    #ifdef __SWITCH__
     appletSetHandlesRequestToDisplay(false);
-	appletStartRebootSequence();
-    #endif
-    return 0;
+	return appletStartRebootSequence();
 }
 
 Result Power::Sleep() {
-    #ifdef __SWITCH__
     appletSetHandlesRequestToDisplay(false);
-    appletStartSleepSequence(true);
-    #endif
-    return 0;
+    return appletStartSleepSequence(true);
 }
 
 u32 Power::GetBatteryLife() {
 	u32 pwr = 100;
-    #ifdef __SWITCH__
     psmInitialize();
 	psmGetBatteryChargePercentage(&pwr);
     psmExit();
-    #endif
 	return pwr;
 }

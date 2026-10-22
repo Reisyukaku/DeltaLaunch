@@ -95,10 +95,8 @@ void Network::Download(std::string url, std::string file) {
 
 u32 Network::GetWifiStrength() {
 	u32 wifiStrength = 0;
-#ifdef __SWITCH__
     NifmInternetConnectionType contype;
     NifmInternetConnectionStatus conStat;
     nifmGetInternetConnectionStatus(&contype, &wifiStrength, &conStat);
-#endif
     return wifiStrength;
 }

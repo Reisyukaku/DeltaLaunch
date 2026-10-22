@@ -121,11 +121,8 @@ namespace mINI
 				}
 			}
 		}
-#ifdef _WIN32
-		const std::string endl = "\r\n";
-#else
-		const std::string endl = "\n";
-#endif
+const std::string endl = "\n";
+
 	};
 
 	template<typename T>

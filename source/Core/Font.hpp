@@ -9,20 +9,7 @@
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-#ifdef __SWITCH__
-extern "C" {
-#include <switch/services/pl.h>
-}
-#else
-#define PlSharedFontType_Total 5
-struct PlFontData
-{
-	u32 type;
-	u32 offset;
-	u32 size;
-	void* address;
-};
-#endif
+
 
 #define TOTAL_FONT_FACES 0x10
 
@@ -281,23 +268,18 @@ public:
 	Fonts() : m_caches()
 	{
 		languageCode = 0;
-#ifdef __SWITCH__
 		totalFontFaces = 0;
-#else
-		totalFontFaces = 5;
-#endif
 
-		//todo memset(&m_fonts, 0, sizeof(m_fonts));
+		memset(&m_fonts, 0, sizeof(m_fonts));
+        memset(&m_fontData, 0, sizeof(m_fontData));
 		memset(&m_fontMap, 0, sizeof(m_fontMap));
 
-#ifdef __SWITCH__
 		setGetSystemLanguage(&languageCode);
 
 		if (plGetSharedFont(languageCode, m_fontData, PlSharedFontType_Total, &totalFontFaces))
 		{
 			return;
 		}
-#endif
 		int i = 0;
 		for (; i < (int)totalFontFaces; i++)
 		{

@@ -29,66 +29,48 @@ std::vector<std::string> Settings::Langs = {"JA", "EN-US", "FR", "DE", "IT", "ES
 std::vector<std::string> Settings::Regions = {"Japan", "USA", "Europe", "Australia", "China", "Korea", "Taiwan"};
 
 std::string Settings::GetFirmwareVersion() {
-    #ifdef __SWITCH__
 	SetSysFirmwareVersion firm;
     setsysGetFirmwareVersion(&firm);
     std::string str = std::string(firm.display_version);
-    #else
-    std::string str = std::string("0.0.0");
-    #endif
     
     return str;
 }
 
 std::string Settings::GetSerialNumber() {
-    #ifdef __SWITCH__
 	SetSysSerialNumber serial;
 	setsysGetSerialNumber(&serial);
     std::string str = std::string(serial.number);
-    #else
-    std::string str = std::string("XAW70000000000");
-    #endif
 	return str;
 }
 
 std::string Settings::GetDeviceNickname() {
-    #ifdef __SWITCH__
-    char nick[0x80] = {0};
-    setsysGetDeviceNickname(nick);
-    std::string str = std::string(nick);
-    #else
-    std::string str = std::string("Delta");
-    #endif
+    SetSysDeviceNickName nick = {};
+    setsysGetDeviceNickname(&nick);
+    std::string str = std::string(nick.nickname);
     return str;
 }
 
 u64 Settings::GetSystemLangCode() {
     Result rc = 0;
     u64 code = 0;
-    #ifdef __SWITCH__
     rc = setGetSystemLanguage(&code);
-    #endif
     return R_SUCCEEDED(rc) ? code : 0;
 }
 
 void Settings::SetDeviceNickname(std::string nick) {
-    #ifdef __SWITCH__
-    setsysSetDeviceNickname((char*)nick.c_str());
-    #endif
+    SetSysDeviceNickName nickname = {};
+    snprintf(nickname.nickname, sizeof(nickname.nickname), "%s", nick.c_str());
+    setsysSetDeviceNickname(&nickname);
 }
 
 bool Settings::GetLockScreenFlag() {
     bool flag = false;
-    #ifdef __SWITCH__
     setsysGetLockScreenFlag(&flag);
-    #endif
     return flag;
 }
 
 void Settings::SetLockScreenFlag(bool flag) {
-    #ifdef __SWITCH__
     setsysSetLockScreenFlag(flag);
-    #endif
 }
 
 std::string Settings::GetThemePath() {
@@ -97,44 +79,36 @@ std::string Settings::GetThemePath() {
 
 size_t Settings::GetMemAvail() {
     size_t mem_available = 0;
-#ifdef __SWITCH__
     svcGetInfo(&mem_available, 6, CUR_PROCESS_HANDLE, 0);
-#endif
     return mem_available;
 }
 
 size_t Settings::GetMemUsed() {
     size_t mem_used = 0;
-#ifdef __SWITCH__
     svcGetInfo(&mem_used, 7, CUR_PROCESS_HANDLE, 0);
-#endif
     return mem_used;
 }
 
 SetLanguage Settings::GetLangIndex() {
     SetLanguage code = SetLanguage_ENUS;
-    #ifdef __SWITCH__
     u64 c;
     setGetSystemLanguage(&c);
     setMakeLanguage(c, &code);
-    #endif
     return code;
 }
 
 SetRegion Settings::GetRegionIndex() {
     SetRegion code = SetRegion_USA;
-    #ifdef __SWITCH__
     setGetRegionCode(&code);
-    #endif
     return code;
 }
 
 bool Settings::HasAutoRCM() {
 	bool ret = false;
-#ifdef __SWITCH__
 	FsStorage store;
 	
 	Result rc =  fsOpenBisStorage(&store, FsBisPartitionId_BootPartition1Root);
+    if (R_FAILED(rc)) return false;
 	s64 size = 0;
 	fsStorageGetSize(&store, &size);
 	if(size==0) return -1;
@@ -149,15 +123,14 @@ bool Settings::HasAutoRCM() {
     
 	fsStorageClose(&store);
 	free(buf);
-#endif
 	return ret;
 }
 
 Result Settings::ToggleAutoRCM() {
     Result rc = 0;
-#ifdef __SWITCH__
 	FsStorage store;
 	rc =  fsOpenBisStorage(&store, FsBisPartitionId_BootPartition1Root);
+    if (R_FAILED(rc)) return rc;
 	s64 size = 0;
 	fsStorageGetSize(&store, &size);
 	if(size==0) return -1;
@@ -174,7 +147,6 @@ Result Settings::ToggleAutoRCM() {
 	rc = fsStorageWrite(&store, 0, buf, size);
 	fsStorageClose(&store);
 	free(buf);
-#endif
     return rc;
 }
 

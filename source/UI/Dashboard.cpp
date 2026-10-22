@@ -43,7 +43,6 @@ Dashboard::Dashboard(u32 width, u32 height) {
 	LockScreen = nullptr;
 	Battery = nullptr;
 	formTex = nullptr;
-	dummyGame = nullptr;
 	menuTex = nullptr;
     
     //Init delta save data
@@ -215,9 +214,6 @@ void Dashboard::Initialize() {
     Wallpaper = Graphics::BlitSurfacesFromString(layers, WindowPos);
     SetLockScreen(gen.getStr("lockscreen_image", RESOURCES("/Graphics/LockSplash.png"), thmPath+"/"), RESOURCES("/Graphics/Overlay/LockIcon.png"));
     Battery = Graphics::CreateTexFromString(batOv.getStr("battery", RESOURCES("/Graphics/Overlay/Battery.png"), thmPath+"/"));
-#ifndef __SWITCH__
-	dummyGame = Graphics::CreateTexFromString(RESOURCES("/Graphics/DummyGame.png"));
-#endif
     layers.clear();
     
     //Organize games and add saved folders
@@ -261,7 +257,7 @@ void Dashboard::SetGames() {
         u64 tid = i < (int)total ? recs[i].application_id : 0;
         if(!game->IsFolder() && tid != game->GetTitleID()) { //assume game entry doesnt need to be updated if tids are the same
             game->SetTitleID(tid);
-            game->SetType(recs[i].type);
+            game->SetType(i < (int)total ? recs[i].last_event : 0);
             
             NsApplicationControlData data = App::GetGameControlData(tid, NsApplicationControlSource_Storage);
             if(game->GetIcon())
@@ -271,23 +267,13 @@ void Dashboard::SetGames() {
                 game->SetIcon(Graphics::CreateTexFromString(gicon));
             } 
             else {
-#ifdef __SWITCH__
                 game->SetIcon(Graphics::CreateTexFromBuffer(data.icon, 0x20000));
-#else
-				game->SetIcon(dummyGame); //only one of these exists so dont free more than one
-#endif
             }
-#ifdef __SWITCH__
             NacpLanguageEntry *langEnt = NULL;
             nacpGetLanguageEntry(&data.nacp, &langEnt);
             game->SetName(langEnt->name);
             game->SetAuthor(langEnt->author);
 			game->SetVersion(std::string(data.nacp.display_version));
-#else
-			game->SetName(data.nacp.lang[0].name);
-			game->SetAuthor(data.nacp.lang[0].author);
-			game->SetVersion("0.0");
-#endif
             game->SetOptionsTexture(formTex);
         }
         i++;
@@ -339,21 +325,21 @@ void Dashboard::UpdateDash() {
     
     //Normal dash controls
     if(!gameOptionsActive) {
-        if(Hid::Input & KEY_A) ActivateDash();
-        if(Hid::Input & KEY_X) CloseApp();
-        if(Hid::Input & KEY_LSTICK)  debugInfo = !debugInfo;
-		if (Hid::Input & KEY_MINUS) {}
-        if(Hid::Input & KEY_PLUS) gameOptionsActive = true;
-        if((Hid::Input & KEY_DLEFT) || (Hid::Input & KEY_LSTICK_LEFT)) DecrementDashSel();
-        if((Hid::Input & KEY_DRIGHT) || (Hid::Input & KEY_LSTICK_RIGHT)) IncrementDashSel();
-        if((Hid::Input & KEY_DUP) || (Hid::Input & KEY_LSTICK_UP)) IncrementLayer();
-        if((Hid::Input & KEY_DDOWN) || (Hid::Input & KEY_LSTICK_DOWN)) DecrementLayer();
+        if(Hid::Input & HidNpadButton_A) ActivateDash();
+        if(Hid::Input & HidNpadButton_X) CloseApp();
+        if(Hid::Input & HidNpadButton_StickL)  debugInfo = !debugInfo;
+		if (Hid::Input & HidNpadButton_Minus) {}
+        if(Hid::Input & HidNpadButton_Plus) gameOptionsActive = true;
+        if((Hid::Input & HidNpadButton_Left) || (Hid::Input & HidNpadButton_StickLLeft)) DecrementDashSel();
+        if((Hid::Input & HidNpadButton_Right) || (Hid::Input & HidNpadButton_StickLRight)) IncrementDashSel();
+        if((Hid::Input & HidNpadButton_Up) || (Hid::Input & HidNpadButton_StickLUp)) IncrementLayer();
+        if((Hid::Input & HidNpadButton_Down) || (Hid::Input & HidNpadButton_StickLDown)) DecrementLayer();
         
         draggingGameArea = Hid::IsMoving(GameIconArea);
         if(draggingGameArea) {
             if(lastPosX != 0) 
-                OffsetGameIcons(Hid::GetTouchPos().px - lastPosX);
-            lastPosX = Hid::GetTouchPos().px;
+                OffsetGameIcons(Hid::GetTouchPos().x - lastPosX);
+            lastPosX = Hid::GetTouchPos().x;
         } else {
             lastPosX = 0;
         }
@@ -418,7 +404,7 @@ void Dashboard::DrawGames() {
     for(auto entry : GameEntries) {
 		if (entry->IsInFolder()) continue;
         gameArea.x = GameIconArea.x + (i * (gamePicSize+gameSpacing));
-        bool isPlaying = (App::currentApplication.active == true && App::currentApplication.tid == entry->GetTitleID());
+        bool isPlaying = (App::applicationActive == true && App::applicationId == entry->GetTitleID());
         switch(Settings::gameSelType) {
             //Classic outline format
             default:
@@ -583,7 +569,7 @@ void Dashboard::DrawDebugText() {
         Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "DeltaLaunch alpha!");
         Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "Firmware: " + Settings::GetFirmwareVersion());
         Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "Battery: " + std::to_string(Power::GetBatteryLife()) + "%");
-        Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "Touch: X=" + std::to_string(Hid::GetTouchPos().px) + "; y=" + std::to_string(Hid::GetTouchPos().py));
+        Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "Touch: X=" + std::to_string(Hid::GetTouchPos().x) + "; y=" + std::to_string(Hid::GetTouchPos().y));
         Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "GameArea: X=" + std::to_string(GameIconArea.x));
         Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "GameSelect: X=" + std::to_string(GameSelect.x));
         Graphics::DrawText(Fonts::FONT_TINY, X, Y+=s, "Mem avail: 0x" + Utils::NumToHexStr(Settings::GetMemAvail(), 8));
@@ -617,11 +603,7 @@ void Dashboard::AddFolder() {
     
     //Get user input for name
     char out[0xC00] = {0};
-#ifdef __SWITCH__
     App::LaunchSwkbd(out, lang->GetString(LANG_FOLDERNAME), "", lang->GetString(LANG_SETNAME), lang->GetString(LANG_FOLDER));
-#else
-	memcpy(out, "Folder", sizeof("Folder"));
-#endif
     std::string name = std::string(out);
     
     //Create folder object
@@ -715,11 +697,11 @@ void Dashboard::ActivateDash() {
     if(App::dashLayer > 0) {
         
         //Boot game if nothings running
-        if(!App::currentApplication.active || GameEntries[App::gameSelectInd]->IsFolder()) {
+        if(!App::applicationActive || GameEntries[App::gameSelectInd]->IsFolder()) {
             rc = GameEntries[App::gameSelectInd]->Run();
         }
         //Close game if you're trying to launch a different game
-        else if(App::currentApplication.active && App::currentApplication.tid != GameEntries[App::gameSelectInd]->GetTitleID()) {
+        else if(App::applicationActive && App::applicationId != GameEntries[App::gameSelectInd]->GetTitleID()) {
             if(msgBox->Show(lang->GetString(LANG_CLOSING), lang->GetString(LANG_CLOSE_APP), MSGBOX_YESNO) == RESULT_YES) {
                 App::CloseGame();
                 rc = GameEntries[App::gameSelectInd]->Run();
@@ -752,7 +734,7 @@ void Dashboard::SelectGame(GameBase *gbase, s32 ind) {
 }
 
 void Dashboard::CloseApp() {
-    if(App::currentApplication.active && App::currentApplication.tid == GameEntries[App::gameSelectInd]->GetTitleID()) {
+    if(App::applicationActive && App::applicationId == GameEntries[App::gameSelectInd]->GetTitleID()) {
         if(msgBox->Show(lang->GetString(LANG_CLOSING), lang->GetString(LANG_CLOSE_APP), MSGBOX_YESNO) == RESULT_YES) {
             App::CloseGame();
         }

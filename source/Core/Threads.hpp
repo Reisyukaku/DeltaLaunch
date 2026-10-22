@@ -17,9 +17,7 @@
 
 #pragma once
 
-#ifdef __SWITCH__
-#include <switch.h>
-#endif
+#include "types.h"
 #include <string>
 #include "../Services/App.hpp"
 

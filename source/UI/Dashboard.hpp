@@ -113,7 +113,6 @@ class Dashboard
         Texture *Battery;
         Texture *folderIcon;
 		Texture *menuTex;
-		Texture *dummyGame;
 		Texture *formTex;
 		Texture *msgTex;
 		Texture *newsTex; //temp?

@@ -18,6 +18,9 @@
 #include "App.hpp"
 
 AppletApplication App::currentApplication;
+bool App::applicationActive = false;
+u64 App::applicationId = 0;
+bool App::appletActive = false;
 AppletHolder App::currentApplet;
 s32 App::appletSelectInd = 0;
 s32 App::gameSelectInd = 0;
@@ -34,7 +37,6 @@ bool App::refreshTheme = false;
 */
 Result App::LaunchGame(u64 tid, AccountUid userID) {
     Result rc = 0;
-    #ifdef __SWITCH__
     AppletStorage aStore;
     
     rc = appletCreateApplication(&currentApplication, tid);
@@ -72,65 +74,44 @@ Result App::LaunchGame(u64 tid, AccountUid userID) {
     appletApplicationRequestForApplicationToGetForeground(&currentApplication);
     //appletHolderJoin(&currentApplication);
     
-    currentApplication.tid = tid;
-    currentApplication.active = true;
-    #endif
+    applicationId = tid;
+    applicationActive = true;
     
     return rc;
 }
 
 void App::CloseGame() {
-#ifdef __SWITCH__
-    if(currentApplication.active) {
+    if(applicationActive) {
         //appletHolderRequestExit(&currentApplication);
         appletApplicationClose(&currentApplication);
-        currentApplication.active = false;
-        currentApplication.tid = 0;
+        applicationActive = false;
+        applicationId = 0;
     }
-#endif
 }
 
 Result App::GetAppRecords(std::vector<NsApplicationRecord> &recs) {
     Result rc = 0;
     s32 size = 0;
 	NsApplicationRecord rec[2000];
-#ifdef __SWITCH__
     rc = nsListApplicationRecord(rec, 2000, 0, &size);
     for(int i = 0; i < (int)size; i++)
         recs.push_back(rec[i]);
-#else
-	NsApplicationRecord pcDummyGame;
-	pcDummyGame.application_id = 0x0100000000000000;
-	recs.push_back(pcDummyGame);
-#endif
     
     return rc;
 }
 
 NsApplicationControlData App::GetGameControlData(u64 tid, NsApplicationControlSource flag) {
-	NsApplicationControlData buffer;
+	NsApplicationControlData buffer = {};
     size_t s = 0;
-#ifdef __SWITCH__
-    nsGetApplicationControlData(flag, tid, &buffer, 0x20000, &s);
-#else
-	NacpStruct dummyNacp;
-	NacpLanguageEntry dummyLang;
-	memcpy(dummyLang.name, "TEST", 5);
-	memcpy(dummyLang.author, "Rei", 4);
-	dummyNacp.lang[0] = dummyLang;
-	//buffer.icon = ;
-	buffer.nacp = dummyNacp;
-#endif
+    nsGetApplicationControlData(flag, tid, &buffer, sizeof(buffer), &s);
     return buffer;
 }
 
 bool App::IsGamecardInserted() {
     bool b = false;
-#ifdef __SWITCH__
     FsDeviceOperator opt;
     fsOpenDeviceOperator(&opt);
     fsDeviceOperatorIsGameCardInserted(&opt, &b);
-#endif
     return b;
 }
 
@@ -139,11 +120,10 @@ bool App::IsGamecardInserted() {
 */
 Result App::LaunchAlbum(u8 arg, bool startupSound) {
     Result rc = 0;
-#ifdef __SWITCH__
     LibAppletArgs args;
     AppletStorage storeIn;
     
-    appletCreateLibraryApplet(&currentApplet, AppletId_photoViewer, LibAppletMode_AllForeground);
+    appletCreateLibraryApplet(&currentApplet, AppletId_LibraryAppletPhotoViewer, LibAppletMode_AllForeground);
     libappletArgsCreate(&args, 0);
     libappletArgsSetPlayStartupSound(&args, startupSound);
     libappletArgsPush(&args, &currentApplet);
@@ -162,26 +142,24 @@ Result App::LaunchAlbum(u8 arg, bool startupSound) {
     }
     appletHolderPushInData(&currentApplet, &storeIn);
     
-    currentApplet.active = true;
+    appletActive = true;
     rc = appletHolderStart(&currentApplet);
     appletHolderJoin(&currentApplet);
     
     appletStorageClose(&storeIn);
     appletHolderClose(&currentApplet);
-    currentApplet.active = false;
-#endif
+    appletActive = false;
     
     return rc;
 }
 
 AccountUid App::LaunchPSelect() {
     Result rc = 0;
-    AccountUid player;
-#ifdef __SWITCH__
+    AccountUid player = {};
     AppletStorage storeIn, storeOut;
     LibAppletArgs args;
     
-    rc = appletCreateLibraryApplet(&currentApplet, AppletId_playerSelect, LibAppletMode_AllForeground);
+    rc = appletCreateLibraryApplet(&currentApplet, AppletId_LibraryAppletPlayerSelect, LibAppletMode_AllForeground);
     if(R_FAILED(rc)) {
         ShowError("Error launching player select", "Error creating lib applet.", rc);
     }
@@ -204,7 +182,7 @@ AccountUid App::LaunchPSelect() {
     }
     appletHolderPushInData(&currentApplet, &storeIn);
     
-    currentApplet.active = true;
+    appletActive = true;
     rc = appletHolderStart(&currentApplet);
     appletHolderJoin(&currentApplet);
     if(R_FAILED(rc)) {
@@ -219,20 +197,18 @@ AccountUid App::LaunchPSelect() {
     appletStorageClose(&storeIn);
     appletStorageClose(&storeOut);
     appletHolderClose(&currentApplet);
-    currentApplet.active = false;
+    appletActive = false;
     
-#endif
     
     return player;
 }
 
 Result App::LaunchShop() {
     Result rc = 0;
-#ifdef __SWITCH__
     LibAppletArgs args;
     AppletStorage storeIn, storeOut;
     
-    appletCreateLibraryApplet(&currentApplet, AppletId_shop, LibAppletMode_AllForeground);
+    appletCreateLibraryApplet(&currentApplet, AppletId_LibraryAppletShop, LibAppletMode_AllForeground);
     libappletArgsCreate(&args, 1);
     libappletArgsPush(&args, &currentApplet);
     
@@ -250,7 +226,7 @@ Result App::LaunchShop() {
     }
     appletHolderPushInData(&currentApplet, &storeIn);
     
-    currentApplet.active = true;
+    appletActive = true;
     rc = appletHolderStart(&currentApplet);
     appletHolderJoin(&currentApplet);
     if(R_FAILED(rc)) {
@@ -265,34 +241,30 @@ Result App::LaunchShop() {
     appletStorageClose(&storeIn);
     appletStorageClose(&storeOut);
     appletHolderClose(&currentApplet);
-    currentApplet.active = false;
-#endif
+    appletActive = false;
     
     return rc;
 }
 
 Result App::LaunchWebsite(std::string url) {
     Result rc = 0;
-#ifdef __SWITCH__
     WebCommonConfig config;
     WebCommonReply reply;
     WebExitReason exitReason = WebExitReason_ExitButton;
     rc = webPageCreate(&config, url.c_str());
     if (R_SUCCEEDED(rc)) {
-        currentApplet.active = true;
+        appletActive = true;
         rc = webConfigShow(&config, &reply);
         if (R_SUCCEEDED(rc))
             rc = webReplyGetExitReason(&reply, &exitReason);
-        currentApplet.active = false;
+        appletActive = false;
     }
-#endif
 
     return rc;
 }
 
 Result App::LaunchSwkbd(char out[0xc00], std::string title, std::string placehold, std::string oktxt, std::string initTxt) {
     Result rc = 0;
-#ifdef __SWITCH__
     SwkbdConfig kbd;
     char tempstr[0xc00] = {0};
     rc = swkbdCreate(&kbd, 0);
@@ -314,17 +286,15 @@ Result App::LaunchSwkbd(char out[0xc00], std::string title, std::string placehol
         ShowError("Software Keyboard Error", "Unknown error, Lookup errorcode for more info", rc);
     }
     swkbdClose(&kbd);
-#endif
     return rc;
 }
 
 Result App::LaunchNetConnect(u32 arg) {
     Result rc = 0;
     u32 outData = 0;
-#ifdef __SWITCH__
     AppletStorage storeIn, storeOut;
     
-    appletCreateLibraryApplet(&currentApplet, AppletId_netConnect, LibAppletMode_AllForeground);
+    appletCreateLibraryApplet(&currentApplet, AppletId_LibraryAppletNetConnect, LibAppletMode_AllForeground);
     
     rc = appletCreateStorage(&storeIn, sizeof(arg));
     if(R_FAILED(rc)) {
@@ -339,7 +309,7 @@ Result App::LaunchNetConnect(u32 arg) {
     }
     appletHolderPushInData(&currentApplet, &storeIn);
     
-    currentApplet.active = true;
+    appletActive = true;
     rc = appletHolderStart(&currentApplet);
     appletHolderJoin(&currentApplet);
     
@@ -355,18 +325,16 @@ Result App::LaunchNetConnect(u32 arg) {
     appletStorageClose(&storeOut);
     appletHolderClose(&currentApplet);
     
-    currentApplet.active = false;
-#endif
+    appletActive = false;
     return outData;
 }
 
 Result App::LaunchController() {
     Result rc = 0;
-#ifdef __SWITCH__
     LibAppletArgs args;
     AppletStorage storeIn, storeOut;
     
-    appletCreateLibraryApplet(&currentApplet, AppletId_controller, LibAppletMode_AllForeground);
+    appletCreateLibraryApplet(&currentApplet, AppletId_LibraryAppletController, LibAppletMode_AllForeground);
     
     libappletArgsCreate(&args, 0);
     libappletArgsSetPlayStartupSound(&args, 0);
@@ -404,7 +372,7 @@ Result App::LaunchController() {
     appletHolderPushInData(&currentApplet, &storeIn);
     appletStorageClose(&storeIn);
     
-    currentApplet.active = true;
+    appletActive = true;
     rc = appletHolderStart(&currentApplet);
     appletHolderJoin(&currentApplet);
     
@@ -419,18 +387,16 @@ Result App::LaunchController() {
     }
     appletStorageClose(&storeOut);
     appletHolderClose(&currentApplet);
-    currentApplet.active = false;
-#endif
+    appletActive = false;
     
     return rc;
 }
 
 Result App::ShowError(std::string errText, std::string details, Result rc) {
-#ifdef __SWITCH__
     AppletStorage errStor;
     LibAppletArgs args;
 
-    appletCreateLibraryApplet(&currentApplet, AppletId_error, LibAppletMode_AllForeground);
+    appletCreateLibraryApplet(&currentApplet, AppletId_LibraryAppletError, LibAppletMode_AllForeground);
     libappletArgsCreate(&args, 1);
     libappletArgsPush(&args, &currentApplet);
     appletCreateStorage(&errStor, 0x1018);
@@ -443,26 +409,23 @@ Result App::ShowError(std::string errText, std::string details, Result rc) {
     appletStorageWrite(&errStor, 0, argBuf, 0x1018);
     appletHolderPushInData(&currentApplet, &errStor);
     
-    currentApplet.active = true;
+    appletActive = true;
     appletHolderStart(&currentApplet);
     appletHolderJoin(&currentApplet);
     appletHolderClose(&currentApplet);
-    currentApplet.active = false;
-#endif
+    appletActive = false;
     
     return 0;
 }
 
 Result App::LaunchHbl() {
     Result rc = 0;
-#ifdef __SWITCH__
-    appletCreateLibraryApplet(&currentApplet, AppletId_offlineWeb, LibAppletMode_AllForeground);
-    currentApplet.active = true;
+    appletCreateLibraryApplet(&currentApplet, AppletId_LibraryAppletOfflineWeb, LibAppletMode_AllForeground);
+    appletActive = true;
     rc = appletHolderStart(&currentApplet);
     appletHolderJoin(&currentApplet);
     appletHolderClose(&currentApplet);
-    currentApplet.active = false;
-#endif
+    appletActive = false;
     
     return rc;
 }
@@ -470,17 +433,13 @@ Result App::LaunchHbl() {
 Result App::RequestForegroundApp() {
 	Result rc = 0;
 	DEBUG(Debug::Type::APPLET, "RequestForegroundApp\n");
-#ifdef __SWITCH__
 	rc = appletApplicationRequestForApplicationToGetForeground(&App::currentApplication);
-#endif
 	return rc;
 }
 
 void App::RequestForegroundDelta() {
 	DEBUG(Debug::Type::APPLET, "RequestForegroundDelta\n");
-#ifdef __SWITCH__
 	appletRequestToGetForeground();
-#endif
 }
 
 /*
@@ -492,12 +451,10 @@ Result App::CommandHandler(u32 cmd) {
         case CMD_Home:
         {
             
-            if(currentApplet.active) { //applet takes presedence
-#ifdef __SWITCH__
+            if(appletActive) { //applet takes presedence
                 appletHolderRequestExit(&currentApplet);
-#endif
             }
-            else if(currentApplication.active) {
+            else if(applicationActive) {
 				RequestForegroundDelta();
             }
             else {

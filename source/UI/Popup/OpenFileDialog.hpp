@@ -88,11 +88,11 @@ namespace UI {
 			}
 
 			//Hid input
-			if (Hid::Input & KEY_DUP)
+			if (Hid::Input & HidNpadButton_Up)
 				selected = (selected <= 0) ? 0 : selected - 1;
-			if (Hid::Input & KEY_DDOWN)
+			if (Hid::Input & HidNpadButton_Down)
 				selected = (selected >= (int)paths.size() - 1) ? (int)paths.size() - 1 : selected + 1;
-			if (Hid::Input & KEY_A) {
+			if (Hid::Input & HidNpadButton_A) {
 				Result rc;
 				Audio::Play(SFX_Activate);
 				if (std::filesystem::is_directory(paths[selected])) {
@@ -105,7 +105,7 @@ namespace UI {
 				}
 				return rc;
 			}
-			if (Hid::Input & KEY_B) {
+			if (Hid::Input & HidNpadButton_B) {
 				Fil = std::filesystem::path("");
 				return 0;
 			}
